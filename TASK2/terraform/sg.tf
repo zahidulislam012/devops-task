@@ -29,7 +29,7 @@ resource "aws_security_group" "web-application-public-alb" {
 
 resource "aws_security_group" "web-application-ec2" {
   name   = "${local.env}-web-application-ec2"
-  vpc_id = data.aws_vpc.recurring.id
+  vpc_id = data.aws_vpc.web-application.id
   depends_on = [
     aws_vpc.vpc,
     aws_security_group.ctob-public-alb,

@@ -3,8 +3,6 @@ module "web-application-asg" {
   name   = "${local.env}-${local.project}-web-application"
 
   vpc_zone_identifier = [data.aws_subnet.private-subnet-1a.id, data.aws_subnet.private-subnet-1b.id, data.aws_subnet.private-subnet-1c.id]
-  scale-up-policy     = local.scale-up-policy
-  scale-down-policy   = local.scale-down-policy
   min_size            = local.web-application-min-instance-count
   desired_capacity    = local.web-application-desired-instance-count
   max_size            = local.web-application-max-instance-count

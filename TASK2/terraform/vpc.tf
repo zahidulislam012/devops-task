@@ -1,4 +1,4 @@
-data "aws_vpc" "recurring" {
+data "aws_vpc" "web-application" {
   id = local.internal-vpc
 }
 data "aws_subnet" "public-subnet-1a" {
