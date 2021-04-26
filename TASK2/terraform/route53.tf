@@ -24,3 +24,12 @@ resource "aws_route53_record" "public_alb" {
   }
   depends_on = [module.web-application-public-alb]
 }
+
+resource "aws_route53_record" "rdsdns" {
+  name = "redis.${local.domain}"
+  type = "CNAME"
+  zone_id = aws_route53_zone.privatezone.zone_id
+  ttl     = "10"
+  records = [module.redis.endpoint]
+  depends_on = [module.redis]
+}
