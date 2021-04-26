@@ -8,7 +8,7 @@ https://github.com/zahidulislam012/company-repo
 ```bash 
 kubectl label nodes <your-node-name> sample=true
 ```
-2. Create Persistance volume
+2. Create persistent volume
 3. Create a volume claimer
 4. Create a Jenkins deployment manifest for auto-deployment
 5. create a Service for Jenkins Deployment file
