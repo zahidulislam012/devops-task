@@ -2,9 +2,9 @@ module "web-application-public-alb" {
   source = "../tf-module/alb"
   internal = false
   name = "${local.env}-${local.project}-public-alb"
-  certificate_arn = module.admin-acm.acm-arn
+  certificate_arn = module.acm.acm-arn
   security_groups = [aws_security_group.public-alb-sg.id]
-  subnets = [module.public-subnet-1a.subnet_id, module.public-subnet-1b.subnet_id, module.public-subnet-1c.subnet_id]
+  subnets = [data.aws_subnet.private-subnet-1a.id, data.aws_subnet.private-subnet-1b.id, data.aws_subnet.private-subnet-1c.id]
   tags = merge(map("Name",join("-",[local.env,local.project,"public-alb"])),map("ResourceType","ALB"),local.common_tags)
 }
 
