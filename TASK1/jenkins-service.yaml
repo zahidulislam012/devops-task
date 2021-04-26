@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name:  jenkins-service
+  namespace: recurring
+spec:
+  ports:
+    - port: 8085
+      targetPort: 8080
+      protocol: TCP
+  type: NodePort
+  selector:
+    app:  jenkins

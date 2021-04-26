@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-webapp
+  namespace: recurring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-webapp
+  template:
+    metadata:
+      labels:
+        app: sample-webapp
+    spec:
+      containers:
+      - name: sample-webapp
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - mountPath: /usr/share/nginx/html
+            name: sample-webapp
+      volumes:
+      - name: sample-webapp
+        persistentVolumeClaim:
+          claimName: pvc-webapp
+      nodeSelector:
+        sample: "true"

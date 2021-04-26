@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+  namespace: recurring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+      - name: jenkins
+        image: jenkins/jenkins:lts
+        resources:
+          limits:
+            memory: "2096Mi"
+            cpu: "1"
+        ports:
+          - name: http-port
+            containerPort: 8080
+          - name: jnlp-port
+            containerPort: 50000
+        volumeMounts:
+          - name: sample-webapp-pvc
+            mountPath: /var/jenkins_home/workspace/test-workspace
+      volumes:
+      - name: sample-webapp-pvc
+        persistentVolumeClaim:
+          claimName: pvc-webapp
+      nodeSelector:
+        sample: "true"
